@@ -69,7 +69,6 @@ else:
     CUSTOMER_ID = st.selectbox(
     "Choisissez l'identifiant d'un client",
     data.SK_ID_CURR)
-    st.dataframe(data_vis)
     options = st.multiselect(
     'Selectionner un ou plusieurs indicateurs',
     nums_columns_name.tolist(),
