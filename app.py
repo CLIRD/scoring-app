@@ -19,7 +19,7 @@ with open('columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
 
-st.sidebar.image('image\pret_a_depenser.png')
+st.sidebar.image('image/pret_a_depenser.png')
 
 st.sidebar.markdown("<h6 style='text-align: center;'>Dashboard - Aide à la décision</h6>", unsafe_allow_html=True)
 inf = st.sidebar.radio("Informations sur: ", ('Le modèle', 'La prédiction', 'Le client')) 
@@ -27,10 +27,10 @@ inf = st.sidebar.radio("Informations sur: ", ('Le modèle', 'La prédiction', 'L
 if inf == "Le modèle":
     st.title("Compréhension global du modèle")
     st.markdown("<h3 style='text-align: center;'>Importance de chaque indicateur</h3>", unsafe_allow_html=True)
-    st.image('image\shap_overall.png')
+    st.image('image/shap_overall.png')
 
     st.markdown("<h3 style='text-align: center;'>Relations positives et négatives de chaque indicateur</h3>", unsafe_allow_html=True)
-    st.image('image\shap_beeswarm.png')
+    st.image('image/shap_beeswarm.png')
 elif inf == "La prédiction":
     st.markdown("<h1 style='text-align: center;'>Prédiction</h1>", unsafe_allow_html=True)
 
