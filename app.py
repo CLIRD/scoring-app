@@ -69,7 +69,7 @@ else:
     CUSTOMER_ID = st.selectbox(
     "Choisissez l'identifiant d'un client",
     data.SK_ID_CURR)
-    st.pyplot(sns.boxplot(data_vis['AMT_INCOME_TOTAL']))
+    st.dataframe(data_vis)
     options = st.multiselect(
     'Selectionner un ou plusieurs indicateurs',
     nums_columns_name.tolist(),
