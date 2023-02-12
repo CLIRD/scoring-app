@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
 
-data_vis = pd.read_csv('data\data.csv')
+data_vis = pd.read_csv('data/data.csv')
 data = pd.read_csv('data\data_prod.csv')
 with open('columns_name.pickle', 'rb') as f:
     columns_name = pickle.load(f)
