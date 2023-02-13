@@ -11,7 +11,7 @@ y_train = pd.read_csv('data/y_train.csv')
 pipeline = joblib.load('app/pipeline-xgboost-scoring')
 pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
-pipeline.fit(X_train, y_train.TARGET)
+pipeline.fit(X_train, y_train)
 
 with open('app/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
