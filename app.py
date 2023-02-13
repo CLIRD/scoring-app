@@ -11,11 +11,11 @@ import pickle
 
 data_vis = pd.read_csv('data/data.csv')
 data = pd.read_csv('data/data_prod.csv')
-with open('columns_name.pickle', 'rb') as f:
+with open('app/columns_name.pickle', 'rb') as f:
     columns_name = pickle.load(f)
 
 
-with open('columns_name_nums.pickle', 'rb') as f:
+with open('app/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
 
