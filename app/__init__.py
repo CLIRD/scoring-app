@@ -20,6 +20,10 @@ pipeline_nums.fit(X_train[nums_columns_name])
 
 app = Flask(__name__)
 
+@app.route('/')
+def test1():
+     return 'Test'
+
 @app.route('/predict', methods = ['GET', 'POST']) #:y_pred[0], 'Class probabilities': y_proba[0][0]
 def predict():
      data = request.get_json()

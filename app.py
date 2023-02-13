@@ -40,7 +40,7 @@ elif inf == "La prédiction":
     
     col1, col2 = st.columns([1, 4])
     # Partie proba
-    response = requests.get('https://ocr-scoring-app.azurewebsites.net/predict', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
+    response = requests.get('http://127.0.0.1:5000/predict', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
     response_dict = json.loads(response.text)
     class_prediction = response_dict['Class']
     class_proba = round(response_dict['Class probabilities'],2)
@@ -55,7 +55,7 @@ elif inf == "La prédiction":
             st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
         # Partie shapley
 
-        response_shapley = requests.get('https://ocr-scoring-app.azurewebsites.net/api/shap', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
+        response_shapley = requests.get('http://127.0.0.1:5000/api/shap', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
         response_dict_shapley = json.loads(response_shapley.text)
         shapley_values = np.array(response_dict_shapley['shapley_values'])
         shapley_base_values = np.array(response_dict_shapley['shapley_base_values'])
@@ -77,7 +77,7 @@ else:
 
     fig, ax = plt.subplots()
     sns.boxplot(data_vis[options], ax = ax, flierprops={"marker": "x"}, color='skyblue', showcaps=True)
-    client_data = requests.get('https://ocr-scoring-app.azurewebsites.net/transform_nums', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
+    client_data = requests.get('http://127.0.0.1:5000/transform_nums', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
     client_data = json.loads(client_data.text)
     client_data = pd.read_json(client_data['data'])
     for k, i in enumerate(options):
