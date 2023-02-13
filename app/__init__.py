@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request, make_response, send_file
 import shap
 import pickle
 
-#pipeline = joblib.load('pipeline-xgboost-scoring')
+pipeline = joblib.load('pipeline-xgboost-scoring')
 #pipeline_nums = joblib.load('pipeline-nums-col-scoring')
 
 # with open('columns_name_nums.pickle', 'rb') as f:
@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Test!'
+    return pipeline
 # @app.route('/predict', methods = ['GET', 'POST']) #:y_pred[0], 'Class probabilities': y_proba[0][0]
 # def predict():
 #     data = request.get_json()
