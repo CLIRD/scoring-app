@@ -8,13 +8,15 @@ pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
 X_train = pd.read_csv('data/X_train.csv')
 y_train = pd.read_csv('data/y_train.csv')
-pipeline = joblib.load('app/pipeline-nums-col-scoring')
+pipeline = joblib.load('app/pipeline-xgboost-scoring')
 pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
+
 pipeline.fit(X_train, y_train.TARGET)
 
-with open('columns_name_nums.pickle', 'rb') as f:
+with open('app/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
+pipeline_nums.fit(X_train[nums_columns_name])
 
 app = Flask(__name__)
 
