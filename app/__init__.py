@@ -3,6 +3,8 @@ import joblib
 from flask import Flask, jsonify, request, make_response, send_file
 import shap
 import pickle
+pipeline = joblib.load('app/pipeline-nums-col-scoring')
+pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
 X_train = pd.read_csv('data\X_train.csv')
 y_train = pd.read_csv('data\y_train.csv')
@@ -14,6 +16,7 @@ with open('columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
 
+app = Flask(__name__)
 
 @app.route('/predict', methods = ['GET', 'POST']) #:y_pred[0], 'Class probabilities': y_proba[0][0]
 def predict():
