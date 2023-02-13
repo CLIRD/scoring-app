@@ -47,6 +47,3 @@ def index():
 #     data = pipeline_nums.transform(df[nums_columns_name])
 #     data = pd.DataFrame(data, columns = nums_columns_name)
 #     return jsonify({'data': data.to_json()})
-
-if __name__ == "__main__":
-    app.run(debug = True )
