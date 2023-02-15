@@ -16,7 +16,7 @@ app  = Flask(__name__)
 
 @app.route('/')
 def test():
-    return {"test": y_train.values[0].tolist()}
+    return {"test": y_train.values[0].tolist()[0]}
 
 @app.route('/test2')
 def test2():
