@@ -9,21 +9,20 @@ import shap
 import pickle
 
 #X_train = pd.read_csv('data/X_train.csv')
+app  = Flask(__name__)
 test = 'https://ocrscoringapp.blob.core.windows.net/containerocr/y_test.csv?sp=r&st=2023-02-15T14:05:58Z&se=2023-02-15T22:05:58Z&spr=https&sv=2021-06-08&sr=b&sig=tsLlGwruDdn7TkG8OMWXWl0Im8PlfUCtOQIM7MyPRE4%3D'
 y_train = pd.read_csv(test)
 
-app  = Flask(__name__)
-
 @app.route('/')
 def test():
-    return {"test": y_train.columns.tolist()}
+    return {"test:": y_train.columns.tolist()}
 @app.route('/test1')
 def tt():
-    return {'testf':y_train.TARGET[0]}
+    return {'testf!!':y_train.TARGET[0]}
 
 @app.route('/test2')
 def test2():
-    return {"test2":'Test!!'}
+    return {"test2:!!!":'Test!!'}
 # pipeline = joblib.load('app/pipeline-xgboost-scoring')
 # pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
