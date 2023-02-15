@@ -10,29 +10,25 @@ import pickle
 
 #X_train = pd.read_csv('data/X_train.csv')
 app  = Flask(__name__)
-test = 'https://ocrscoringapp.blob.core.windows.net/containerocr/X_train.csv?sp=r&st=2023-02-15T15:36:12Z&se=2023-02-15T23:36:12Z&spr=https&sv=2021-06-08&sr=b&sig=ESWBGCG5wLQvo1rj1sElWeKWSL6ql5fa3ScBUumrFF4%3D'
+#test = 'https://ocrscoringapp.blob.core.windows.net/containerocr/X_train.csv?sp=r&st=2023-02-15T15:36:12Z&se=2023-02-15T23:36:12Z&spr=https&sv=2021-06-08&sr=b&sig=ESWBGCG5wLQvo1rj1sElWeKWSL6ql5fa3ScBUumrFF4%3D'
 #y_train = pd.read_csv(test)
-x_train = pd.read_csv(test)
-locations = x_train.loc[[0]]
+# x_train = pd.read_csv(test)
+# locations = x_train.loc[[0]]
 with open('app/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
 pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
+pipeline = joblib.load('app/pipeline-xgboost-scoring')
 
-x_scaled = pipeline_nums.transform(locations[nums_columns_name])
+#x_scaled = pipeline_nums.transform(locations[nums_columns_name])
 
-@app.route('/')
-def test():
-    return {"test:":x_scaled.tolist()}
+# @app.route('/')
+# def test():
+#     return {"test:":x_scaled.tolist()}
 
-@app.route('/test2')
-def test2():
-    return {"test2:!!!":'Test!!'}
-
-# pipeline = joblib.load('app/pipeline-xgboost-scoring')
-# pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
-
-# pipeline.fit(X_train, y_train)
+# @app.route('/test2')
+# def test2():
+#     return {"test2:!!!":'Test!!'}
 
 # with open('app/columns_name_nums.pickle', 'rb') as f:
 #     nums_columns_name = pickle.load(f)
@@ -40,14 +36,14 @@ def test2():
 # pipeline_nums.fit(X_train[nums_columns_name])
 #  
 
-# @app.route('/predict', methods = ['GET', 'POST']) #:y_pred[0], 'Class probabilities': y_proba[0][0]
-# def predict():
-#      data = request.get_json()
-#      df = pd.read_json(data)
-#      y_pred = pipeline.predict(df)
-#      y_proba = pipeline.predict_proba(df)
+@app.route('/predict', methods = ['GET', 'POST']) #:y_pred[0], 'Class probabilities': y_proba[0][0]
+def predict():
+     data = request.get_json()
+     df = pd.read_json(data)
+     y_pred = pipeline.predict(df)
+     y_proba = pipeline.predict_proba(df)
 
-#      return jsonify({"Class":y_pred[0].tolist(), 'Class probabilities': y_proba[0][1].tolist()})
+     return jsonify({"Class":y_pred[0].tolist(), 'Class probabilities': y_proba[0][1].tolist()})
 
 # def features_prep(df): 
 #      data = pipeline[0].transform(df)
