@@ -1,17 +1,26 @@
 import pandas as pd
-# import joblib
+import joblib
 from flask import Flask, jsonify, request, make_response, send_file
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 
-# import shap
-# import pickle
-# pipeline = joblib.load('app/pipeline-nums-col-scoring')
-# pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
+import shap
+import pickle
 
-# X_train = pd.read_csv('data/X_train.csv')
-# y_train = pd.read_csv('data/y_train.csv')
+#X_train = pd.read_csv('data/X_train.csv')
+
+y_train = pd.read_csv('data/y_train.csv')
+
+app  = Flask(__name__)
+
+@app.route('/')
+def test():
+    return {"test": y_train.values[0].tolist()}
+
+@app.route('/test2')
+def test2():
+    return {"test2":'Test!!'}
 # pipeline = joblib.load('app/pipeline-xgboost-scoring')
 # pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
@@ -21,32 +30,7 @@ from sklearn.ensemble import RandomForestClassifier
 #     nums_columns_name = pickle.load(f)
 
 # pipeline_nums.fit(X_train[nums_columns_name])
-iris = datasets.load_iris()
-
-data=pd.DataFrame({
-    'sepal length':iris.data[:,0],
-    'sepal width':iris.data[:,1],
-    'petal length':iris.data[:,2],
-    'petal width':iris.data[:,3],
-    'species':iris.target
-})
-
-X=data[['sepal length', 'sepal width', 'petal length', 'petal width']]
-y=data['species']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-clf=RandomForestClassifier(n_estimators=100)
-
-clf.fit(X_train,y_train)
-app = Flask(__name__)
-
-@app.route('/')
-def test1():
-     return 'Test'
-
-@app.route('/test')
-def test2():
-     return {'test predict': clf.predict([[3, 5, 4, 2]]).tolist()}
+#  
 
 # @app.route('/predict', methods = ['GET', 'POST']) #:y_pred[0], 'Class probabilities': y_proba[0][0]
 # def predict():
