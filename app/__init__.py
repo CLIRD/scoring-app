@@ -10,13 +10,16 @@ import pickle
 
 #X_train = pd.read_csv('data/X_train.csv')
 
-y_train = pd.read_csv('data/y_train.csv')
+y_train = pd.read_csv('data\y_train.csv')
 
 app  = Flask(__name__)
 
 @app.route('/')
 def test():
-    return {"test": y_train.TARGET[0]}
+    return {"test": y_train.columns.tolist()}
+
+def tt():
+    return {'testf':y_train.TARGET[0]}
 
 @app.route('/test2')
 def test2():
