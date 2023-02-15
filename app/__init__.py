@@ -9,8 +9,8 @@ import shap
 import pickle
 
 #X_train = pd.read_csv('data/X_train.csv')
-
-y_train = pd.read_csv('data/y_train.csv')
+test = 'https://ocrscoringapp.blob.core.windows.net/containerocr/y_test.csv?sp=r&st=2023-02-15T14:05:58Z&se=2023-02-15T22:05:58Z&spr=https&sv=2021-06-08&sr=b&sig=tsLlGwruDdn7TkG8OMWXWl0Im8PlfUCtOQIM7MyPRE4%3D'
+y_train = pd.read_csv(test)
 
 app  = Flask(__name__)
 
