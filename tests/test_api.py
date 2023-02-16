@@ -2,7 +2,8 @@ import requests
 import pandas as pd
 import json
 import numpy as np
-
+import joblib
+pipeline = joblib.load('app/pipeline-xgboost-scoring')
 
 ENDPOINT = 'https://ocr-scoring-app.azurewebsites.net'
 test_data = pd.read_csv('data\X_test.csv').loc[[0]]
@@ -16,7 +17,7 @@ def test_can_call_endpoint_shap():
     assert response.status_code == 200
 
 def test_shape_features_prep():
-    actual_shape = flask_api.features_prep(test_data).shape
+    actual_shape = pipeline[0].transform(test_data).shape
     expected_shape = (1, 158)
     assert actual_shape == expected_shape
 

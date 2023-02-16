@@ -23,7 +23,7 @@ def predict():
      y_pred = pipeline.predict(df)
      y_proba = pipeline.predict_proba(df)
 
-     return jsonify({"Class":y_pred[0].tolist(), 'Class probabilities': y_proba[0][1].tolist()})
+     return jsonify({"Class":y_pred[0].tolist(), 'Class probabilities': y_proba[0][0].tolist()})
 
 def features_prep(df): 
      data = pipeline[0].transform(df)

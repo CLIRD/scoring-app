@@ -75,7 +75,7 @@ else:
     options = st.multiselect(
     'Selectionner un ou plusieurs indicateurs',
     nums_columns_name.tolist(),
-    ['AMT_INCOME_TOTAL', 'AMT_GOODS_PRICE'])
+    ['AMT_GOODS_PRICE'])
     sns.set(style="darkgrid")
 
     fig, ax = plt.subplots()
@@ -97,7 +97,7 @@ else:
     options2 = st.multiselect(
     'Selectionner un ou plusieurs indicateurs',
     data.columns,
-    ['AMT_INCOME_TOTAL'])
+    ['AMT_GOODS_PRICE'])
 
     st.dataframe(data.query(f'SK_ID_CURR == {CUSTOMER_ID}')[options2])
 
