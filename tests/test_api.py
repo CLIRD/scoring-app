@@ -1,11 +1,11 @@
 import requests
 import pandas as pd
-import flask_api
+from app import flask_api
 import json
 import numpy as np
 
 
-ENDPOINT = 'http://127.0.0.1:5000/'
+ENDPOINT = 'https://ocr-scoring-app.azurewebsites.net'
 test_data = pd.read_csv('data\X_test.csv').loc[[0]]
 
 def test_can_call_endpoint_predict():

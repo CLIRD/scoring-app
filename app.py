@@ -47,11 +47,11 @@ elif inf == "La prédiction":
     class_prediction = response_dict['Class']
     class_proba = round(response_dict['Class probabilities'],2)
     with col1:
-        st.metric(label="Probabilité", value= 1 - class_proba)
+        st.metric(label="Probabilité", value=class_proba)
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
     with col2:
-        if class_proba >= 0.271906: 
+        if class_proba >= 0.5: 
             st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
         else: 
             st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
@@ -66,6 +66,7 @@ elif inf == "La prédiction":
         number_feature = st.slider("Nombre de caractéristique à afficher", 0, 158, 10)
         explainer = shap.Explanation(shapley_values, shapley_base_values, shapley_data, feature_names= columns_name)
         st.pyplot(shap.waterfall_plot(explainer[0], show = False, max_display = number_feature))
+        #shap.plots._waterfall.waterfall_legacy(explainer.expected_value[0], explainer.shap_values(d)[0][0])
 else: 
     st.title("Comparative d'un client à l'ensemble des clients")
     CUSTOMER_ID = st.selectbox(
