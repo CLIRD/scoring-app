@@ -1,6 +1,5 @@
 import requests
 import pandas as pd
-from app import flask_api
 import json
 import numpy as np
 
