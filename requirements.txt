@@ -11,3 +11,4 @@ requests == 2.28.2
 numpy == 1.23.5
 xgboost == 1.7.3
 hyperopt == 0.2.7
+pytest == 7.2.1

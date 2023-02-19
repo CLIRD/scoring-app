@@ -4,6 +4,7 @@ import json
 import numpy as np
 import joblib
 import pickle
+import pytest
 
 with open('app/columns_name.pickle', 'rb') as f:
     columns_names = pickle.load(f)
