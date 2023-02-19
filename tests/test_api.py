@@ -9,7 +9,7 @@ import pytest
 with open('app/columns_name.pickle', 'rb') as f:
     columns_names = pickle.load(f)
 
-with open('app\columns_name_nums.pickle', 'rb') as f:
+with open('app/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
 pipeline = joblib.load('app/pipeline-xgboost-scoring')
