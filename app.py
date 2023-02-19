@@ -47,14 +47,18 @@ elif inf == "La prédiction":
     class_prediction = response_dict['Class']
     class_proba = round(response_dict['Class probabilities'],2)
     with col1:
-        st.metric(label="Probabilité", value=class_proba)
+        st.metric(label="Probabilité", value=round(1- class_proba, 2))
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
     with col2:
-        if class_proba >= 0.5: 
-            st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
-        else: 
+        #if class_proba >= 0.5: 
+        #    st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
+        #else: 
+        #    st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
+        if class_prediction == 0: 
             st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
+        else: 
+            st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
         # Partie shapley
 
         response_shapley = requests.get(ENDPOINT + '/api/shap', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
