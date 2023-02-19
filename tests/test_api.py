@@ -15,7 +15,8 @@ with open('app/columns_name_nums.pickle', 'rb') as f:
 pipeline = joblib.load('app/pipeline-xgboost-scoring')
 pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
-test_data = pd.read_csv('data/data_prod.csv').loc[[0]].to_json()
+with open('test_data.json', 'r') as openfile: 
+    test_data = json.load(openfile)
 
 def test_check_columns():
     df = pd.read_json(test_data)
