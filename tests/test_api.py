@@ -15,12 +15,12 @@ with open('app/columns_name_nums.pickle', 'rb') as f:
 pipeline = joblib.load('app/pipeline-xgboost-scoring')
 pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
 
-test_data = pd.read_csv('data/X_test.csv').loc[[0]].to_json()
+test_data = pd.read_csv('data\data_prod.csv').loc[[0]].to_json()
 
 def test_check_columns():
     df = pd.read_json(test_data)
     columns = df.columns
-    assert all(item in columns.tolist() for item in columns_names)
+    assert all(item in columns for item in columns_names)
 
 def test_check_pipeline_predict():
     df = pd.read_json(test_data)
