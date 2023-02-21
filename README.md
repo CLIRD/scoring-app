@@ -20,3 +20,4 @@ Le repository contient les éléments suivants:
 - data_dashboard.ipynb: Notebook pour la normalisation des données nécessaires pour le dashboard
 - style.css: Feuille de style pour le dashboard
 - requirements.txt : liste des librairies python requises pour le fonctionnement des programmes
+- custom_transformer.py: Classe pour la transformation des données +/- l'infinie en valeurs manquantes
