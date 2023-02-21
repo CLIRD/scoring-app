@@ -6,16 +6,16 @@ import joblib
 import pickle
 import pytest
 
-with open('app/columns_name.pickle', 'rb') as f:
+with open('app/columns/columns_name.pickle', 'rb') as f:
     columns_names = pickle.load(f)
 
-with open('app/columns_name_nums.pickle', 'rb') as f:
+with open('app/columns/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
-pipeline = joblib.load('app/pipeline-xgboost-scoring')
-pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
+pipeline = joblib.load('app/models/pipeline-xgboost-scoring')
+pipeline_nums = joblib.load('app/models/pipeline-nums-col-scoring')
 
-with open('test_data.json', 'r') as openfile: 
+with open('tests/test_data.json', 'r') as openfile: 
     test_data = json.load(openfile)
 
 def test_check_columns():

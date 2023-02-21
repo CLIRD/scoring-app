@@ -13,11 +13,12 @@ ENDPOINT = 'https://ocr-scoring-app.azurewebsites.net'
 
 data_vis = pd.read_csv('data/data.csv')
 data = pd.read_csv('data/data_prod.csv')
-with open('app/columns_name.pickle', 'rb') as f:
+
+with open('app/columns/columns_name.pickle', 'rb') as f:
     columns_name = pickle.load(f)
 
 
-with open('app/columns_name_nums.pickle', 'rb') as f:
+with open('app/columns/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
 
@@ -51,14 +52,14 @@ elif inf == "La prédiction":
         with open('style.css') as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
     with col2:
-        #if class_proba >= 0.5: 
-        #    st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
-        #else: 
-        #    st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
-        if class_prediction == 0: 
-            st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
-        else: 
+        if class_proba >= 0.35: 
             st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
+        else: 
+            st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
+        #if class_prediction == 0: 
+        #    st.success('Le demandeur a une forte probabilité de rembourser le prêt !')
+        #else: 
+        #    st.error('Attention ! Le demandeur a un risque élevé de ne pas rembourser le prêt !') 
         # Partie shapley
 
         response_shapley = requests.get(ENDPOINT + '/api/shap', json = data.query(f'SK_ID_CURR == {CUSTOMER_ID}').to_json())
@@ -72,7 +73,7 @@ elif inf == "La prédiction":
         st.pyplot(shap.waterfall_plot(explainer[0], show = False, max_display = number_feature))
         #shap.plots._waterfall.waterfall_legacy(explainer.expected_value[0], explainer.shap_values(d)[0][0])
 else: 
-    st.title("Comparative d'un client à l'ensemble des clients")
+    st.title("Comparatif d'un client à l'ensemble des clients")
     CUSTOMER_ID = st.selectbox(
     "Choisissez l'identifiant d'un client",
     data.SK_ID_CURR)
@@ -96,7 +97,7 @@ else:
 
     st.pyplot(fig)
 
-    st.title("Descriptives relatives à un client")
+    st.title("Descriptif relatif à un client")
     
     options2 = st.multiselect(
     'Selectionner un ou plusieurs indicateurs',

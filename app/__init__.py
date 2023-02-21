@@ -9,11 +9,11 @@ import shap
 import pickle
 
 app  = Flask(__name__)
-with open('app/columns_name_nums.pickle', 'rb') as f:
+with open('app/columns/columns_name_nums.pickle', 'rb') as f:
     nums_columns_name = pickle.load(f)
 
-pipeline_nums = joblib.load('app/pipeline-nums-col-scoring')
-pipeline = joblib.load('app/pipeline-xgboost-scoring')
+pipeline_nums = joblib.load('app/models/pipeline-nums-col-scoring')
+pipeline = joblib.load('app/models/pipeline-xgboost-scoring')
 
 
 @app.route('/predict', methods = ['GET', 'POST'])

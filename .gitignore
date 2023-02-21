@@ -4,3 +4,7 @@ mlflow.db
 __pycache__
 test_api.ipynb
 info.py
+X_train.csv
+X_test.csv
+y_train.csv
+y_test.csv
